@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Search from './pages/Search';
 import Favorites from './pages/Favorites';
 import NotFound from './pages/NotFound';
-import NavigationBar from './components/NavigationBar';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 
 const App: React.FC = () => {
   return (
