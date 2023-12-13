@@ -1,10 +1,14 @@
-// src/pages/Favorites.tsx
+// src/pages/Favorites/Favorites.tsx
 import React from 'react';
+import FavoritesList from '../components/FavoritesList/FavoritesList';
+import { useFavorites } from '../context/FavoritesContext';
 
 const Favorites: React.FC = () => {
+  const { favorites, rateFavorite, removeFavorite } = useFavorites();
+
   return (
     <div>
-      <h1>Favorites Page</h1>
+      <FavoritesList favorites={favorites} onRate={rateFavorite} onRemove={removeFavorite} />
     </div>
   );
 };

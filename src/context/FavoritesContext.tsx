@@ -1,27 +1,36 @@
 // src/context/FavoritesContext.tsx
 import { createContext, useContext, ReactNode, useState } from 'react';
+import { IFavoriteGitHubRepository } from '../models/IFavoriteGitHubRepository';
+import { IGitHubRepository } from '../models/IGitHubRepository';
 
 interface FavoritesContextProps {
-  favorites: string[];
-  addFavorite: (repository: string) => void;
-  removeFavorite: (repository: string) => void;
+  favorites: IFavoriteGitHubRepository[];
+  addFavorite: (repository: IGitHubRepository) => void;
+  removeFavorite: (id: string) => void;
+  rateFavorite: (id: string, rating: number) => void;
 }
 
 const FavoritesContext = createContext<FavoritesContextProps | undefined>(undefined);
 
 const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<IFavoriteGitHubRepository[]>([]);
 
-  const addFavorite = (repository: string) => {
-    setFavorites((prevFavorites) => [...prevFavorites, repository]);
+  const addFavorite = (repository: IGitHubRepository) => {
+    setFavorites((prevFavorites) => [...prevFavorites, { ...repository, rating: 0 }]);
   };
 
-  const removeFavorite = (repository: string) => {
-    setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav !== repository));
+  const removeFavorite = (id: string) => {
+    setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== id));
+  };
+
+  const rateFavorite = (id: string, rating: number) => {
+    setFavorites((prevFavorites) =>
+      prevFavorites.map((fav) => (fav.id === id ? { ...fav, rating } : fav))
+    );
   };
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite }}>
+    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, rateFavorite }}>
       {children}
     </FavoritesContext.Provider>
   );
