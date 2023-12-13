@@ -12,6 +12,7 @@ interface UseSearchContainerResult {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   searchResults: IGitHubRepository[];
   loading: boolean;
+  loaded: boolean;
   error: Error | undefined;
   hasMore: boolean;
   onLoadMore: () => void;
@@ -23,13 +24,18 @@ const useSearchContainer = (): UseSearchContainerResult => {
   const [searchResults, setSearchResults] = useState<IGitHubRepository[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   const debouncedSearchQuery = useDebounce<string>(searchQuery, 500)
 
   useEffect(() => {
     if (debouncedSearchQuery.length > 2) {
       setLoading(true);
-      searchRepositories({ variables: { query: debouncedSearchQuery, first: 10 } }).finally(() => setLoading(false));
+      searchRepositories({ variables: { query: debouncedSearchQuery, first: 10 } })
+        .finally(() => {
+          setLoading(false);
+          if (!loaded) setLoaded(true);
+        });
     }
   }, [debouncedSearchQuery]);
 
@@ -58,7 +64,7 @@ const useSearchContainer = (): UseSearchContainerResult => {
     }
   }, [data, searchQuery]);
 
-  return { searchQuery, setSearchQuery, searchResults, loading, error, hasMore, onLoadMore };
+  return { searchQuery, setSearchQuery, searchResults, loading, loaded, error, hasMore, onLoadMore };
 };
 
 export default useSearchContainer;

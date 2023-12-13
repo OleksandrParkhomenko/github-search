@@ -11,12 +11,13 @@ import Button from '@mui/material/Button';
 interface SearchResultsProps {
   searchResults: IGitHubRepository[];
   loading: boolean;
+  loaded: boolean;
   error: Error | undefined;
   hasMore: boolean;
   onLoadMore: () => void;
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, loading, error, hasMore, onLoadMore }) => {
+const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, loading, loaded, error, hasMore, onLoadMore }) => {
   return (
     <div>
       {error && <Alert severity="error" className={styles.alertContainer}>Error: {error.message}</Alert>}
@@ -44,7 +45,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, loading, e
           )}
         </>
       )}
-      {!error && !loading && searchResults.length === 0 && (
+      {!error && !loading && loaded && searchResults.length === 0 && (
         <Alert severity="info" className={styles.alertContainer}>
           No results found.
         </Alert>
