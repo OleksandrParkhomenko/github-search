@@ -1,5 +1,5 @@
 // src/context/FavoritesContext.tsx
-import { createContext, useContext, ReactNode, useState } from 'react';
+import { createContext, useContext, ReactNode, useEffect, useState } from 'react';
 import { IFavoriteGitHubRepository } from '../models/IFavoriteGitHubRepository';
 import { IGitHubRepository } from '../models/IGitHubRepository';
 
@@ -13,7 +13,12 @@ interface FavoritesContextProps {
 const FavoritesContext = createContext<FavoritesContextProps | undefined>(undefined);
 
 const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [favorites, setFavorites] = useState<IFavoriteGitHubRepository[]>([]);
+  const [favorites, setFavorites] = useState<IFavoriteGitHubRepository[]>(
+    () => {
+      const storedFavorites = localStorage.getItem('favorites');
+      return storedFavorites ? JSON.parse(storedFavorites) : [];
+    }
+  );
 
   const addFavorite = (repository: IGitHubRepository) => {
     setFavorites((prevFavorites) => [...prevFavorites, { ...repository, rating: 0 }]);
@@ -28,6 +33,10 @@ const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       prevFavorites.map((fav) => (fav.id === id ? { ...fav, rating } : fav))
     );
   };
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, rateFavorite }}>
