@@ -1,9 +1,8 @@
 // src/components/SearchBar/SearchBar.tsx
 import React from 'react';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import styles from '../../styles/SearchBar.module.css';
 import CircularProgress from '@mui/material/CircularProgress';
+import styles from '../../styles/SearchBar.module.css';
 
 interface SearchBarProps {
   value: string;
@@ -13,6 +12,8 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ value, loading, onChange, onSearch }) => {
+  const helperText = value.length >= 3 ? ' ' : 'Enter at least 3 characters';
+
   return (
     <div className={styles.container}>
       <TextField
@@ -22,12 +23,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, loading, onChange, onSearc
         fullWidth
         className={styles.input}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          onChange(e.target.value);
+          if (e.target.value.length >= 3) {
+            onSearch();
+          }
+        }}
+        InputProps={{
+          endAdornment: loading && <CircularProgress size={24} />,
+        }}
+        helperText={helperText}
       />
-      <Button variant="contained" color="primary" onClick={onSearch} className={styles.button}>
-        {!loading && <>Search</>}
-        {loading && <CircularProgress size={24} />}
-      </Button>
     </div>
   );
 };
