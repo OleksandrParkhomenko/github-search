@@ -1,6 +1,7 @@
 // src/components/FavoritesList/FavoritesList.tsx
 import React from 'react';
 import { IFavoriteGitHubRepository } from '../../models/IFavoriteGitHubRepository';
+import RepositoryListItem from '../RepositoryListItem/RepositoryListItem';
 
 interface FavoritesListProps {
   favorites: IFavoriteGitHubRepository[];
@@ -11,14 +12,8 @@ interface FavoritesListProps {
 const FavoritesList: React.FC<FavoritesListProps> = ({ favorites, onRate, onRemove }) => {
   return (
     <div>
-      <h2>Favorites</h2>
       {favorites.map((favorite) => (
-        <div key={favorite.id}>
-          <p>{favorite.name}</p>
-          <p>Rating: {favorite.rating}</p>
-          <button onClick={() => onRate(favorite.id, favorite.rating + 1)}>Rate +1</button>
-          <button onClick={() => onRemove(favorite.id)}>Remove</button>
-        </div>
+        <RepositoryListItem key={favorite.id} repository={favorite} isFavorite={true} />
       ))}
     </div>
   );

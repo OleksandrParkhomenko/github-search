@@ -8,7 +8,7 @@ const Search: React.FC = () => {
   return (
     <div className={styles.container}>
       <Typography variant="h1" gutterBottom>
-        Search Page
+        Search
       </Typography>
       <SearchContainer />
     </div>
