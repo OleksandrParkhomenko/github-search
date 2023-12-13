@@ -45,7 +45,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, loading, e
           )}
         </>
       )}
-      {!loading && searchResults.length === 0 && (
+      {!error && !loading && searchResults.length === 0 && (
         <Alert severity="info" className={styles.alertContainer}>
           No results found.
         </Alert>
