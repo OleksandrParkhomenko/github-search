@@ -23,16 +23,16 @@ const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   );
 
   const addFavorite = (repository: IGitHubRepository) => {
-    setFavorites((prevFavorites) => [...prevFavorites, { ...repository, rating: 0 }]);
+    setFavorites((prevFavorites) => [{ ...repository, rating: 0 }, ...prevFavorites]);
   };
 
   const removeFavorite = (id: string) => {
-    setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== id));
+    setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.id !== id));
   };
 
   const rateFavorite = (id: string, rating: number) => {
     setFavorites((prevFavorites) =>
-      prevFavorites.map((fav) => (fav.id === id ? { ...fav, rating } : fav))
+      prevFavorites.map((favorite) => (favorite.id === id ? { ...favorite, rating } : favorite))
     );
   };
 
