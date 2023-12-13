@@ -4,7 +4,7 @@ import { useLazyQuery } from '@apollo/client';
 import { SEARCH_REPOSITORIES } from '../../../services/githubQueries';
 import { IGitHubSearchResponse } from '../../../models/IGitHubSearchResponse';
 import { IGitHubRepository } from '../../../models/IGitHubRepository';
-import { debounce } from '../../../utils/debounce';
+import { useDebounce } from '../../../utils/useDebounce';
 
 
 interface UseSearchContainerResult {
@@ -13,7 +13,6 @@ interface UseSearchContainerResult {
   searchResults: IGitHubRepository[];
   loading: boolean;
   error: Error | undefined;
-  handleSearch: () => void;
   hasMore: boolean;
   onLoadMore: () => void;
 }
@@ -25,16 +24,14 @@ const useSearchContainer = (): UseSearchContainerResult => {
   const [hasMore, setHasMore] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const delayedSearch = debounce(async () => {
-    setLoading(true);
-    await searchRepositories({ variables: { query: searchQuery, first: 10 } });
-    console.log('test');
-    setLoading(false);
-  }, 500);
+  const debouncedSearchQuery = useDebounce<string>(searchQuery, 500)
 
-  const handleSearch = () => {
-    delayedSearch();
-  };
+  useEffect(() => {
+    if (debouncedSearchQuery.length > 2) {
+      setLoading(true);
+      searchRepositories({ variables: { query: debouncedSearchQuery, first: 10 } }).finally(() => setLoading(false));
+    }
+  }, [debouncedSearchQuery]);
 
   const onLoadMore = () => {
     setLoading(true);
@@ -61,7 +58,7 @@ const useSearchContainer = (): UseSearchContainerResult => {
     }
   }, [data, searchQuery]);
 
-  return { searchQuery, setSearchQuery, searchResults, loading, error, handleSearch, hasMore, onLoadMore };
+  return { searchQuery, setSearchQuery, searchResults, loading, error, hasMore, onLoadMore };
 };
 
 export default useSearchContainer;

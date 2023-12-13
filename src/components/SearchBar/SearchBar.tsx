@@ -8,10 +8,9 @@ interface SearchBarProps {
   value: string;
   loading: boolean;
   onChange: (value: string) => void;
-  onSearch: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ value, loading, onChange, onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ value, loading, onChange }) => {
   const helperText = value.length >= 3 ? ' ' : 'Enter at least 3 characters';
 
   return (
@@ -22,12 +21,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, loading, onChange, onSearc
         color="primary"
         fullWidth
         className={styles.input}
-        value={value}
         onChange={(e) => {
           onChange(e.target.value);
-          if (e.target.value.length >= 3) {
-            onSearch();
-          }
         }}
         InputProps={{
           endAdornment: loading && <CircularProgress size={24} />,
