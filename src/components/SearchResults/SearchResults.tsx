@@ -2,7 +2,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import { IGitHubRepository } from '../../models/IGitHubRepository';
-import { useFavorites } from '../../context/FavoritesContext';
 import RepositoryListItem from '../RepositoryListItem/RepositoryListItem';
 import styles from '../../styles/SearchResults.module.css';
 import CircularProgress from '@mui/material/CircularProgress';

@@ -4,6 +4,10 @@
   margin-top: 16px;
 }
 
+.resultsTitle {
+  margin-bottom: 16px;
+}
+
 .loadMoreButtonContainer {
   display: flex;
   justify-content: center;
