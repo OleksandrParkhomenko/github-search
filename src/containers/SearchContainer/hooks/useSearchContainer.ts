@@ -37,6 +37,7 @@ const useSearchContainer = (): UseSearchContainerResult => {
           if (!loaded) setLoaded(true);
         });
     }
+  // eslint-disable-next-line
   }, [debouncedSearchQuery]);
 
   const onLoadMore = () => {
