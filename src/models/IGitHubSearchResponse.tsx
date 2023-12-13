@@ -4,5 +4,9 @@ import { IGitHubRepository } from './IGitHubRepository';
 export interface IGitHubSearchResponse {
   search: {
     edges: IGitHubRepository[];
+    pageInfo: {
+      endCursor: string;
+      hasNextPage: boolean;
+    };
   };
 }

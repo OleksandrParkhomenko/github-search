@@ -14,29 +14,54 @@ interface UseSearchContainerResult {
   loading: boolean;
   error: Error | undefined;
   handleSearch: () => void;
+  hasMore: boolean;
+  onLoadMore: () => void;
 }
 
 const useSearchContainer = (): UseSearchContainerResult => {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [searchRepositories, { loading, error, data }] = useLazyQuery<IGitHubSearchResponse>(SEARCH_REPOSITORIES);
+  const [searchRepositories, { error, data, fetchMore }] = useLazyQuery<IGitHubSearchResponse>(SEARCH_REPOSITORIES);
   const [searchResults, setSearchResults] = useState<IGitHubRepository[]>([]);
+  const [hasMore, setHasMore] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const delayedSearch = debounce(() => {
-    searchRepositories({ variables: { query: searchQuery } });
-  }, 500); 
+  const delayedSearch = debounce(async () => {
+    setLoading(true);
+    await searchRepositories({ variables: { query: searchQuery, first: 10 } });
+    console.log('test');
+    setLoading(false);
+  }, 500);
 
   const handleSearch = () => {
     delayedSearch();
+  };
+
+  const onLoadMore = () => {
+    setLoading(true);
+    if (fetchMore && data && data.search.pageInfo.hasNextPage) {
+      fetchMore({
+        variables: { query: searchQuery, first: 10, after: data.search.pageInfo.endCursor },
+      }).then((result) => {
+        if (result.data && result.data.search) {
+          const newRepositories = result.data.search.edges.map((edge: any) => edge.node);
+          setSearchResults((prevResults) => [...prevResults, ...newRepositories]);
+          setHasMore(result.data.search.pageInfo.hasNextPage);
+        }
+      }).finally(() => {
+        setLoading(false);
+      });
+    }
   };
 
   useEffect(() => {
     if (data && data.search) {
       const repositories = data.search.edges.map((edge: any) => edge.node);
       setSearchResults(repositories);
+      setHasMore(data.search.pageInfo.hasNextPage);
     }
   }, [data, searchQuery]);
 
-  return { searchQuery, setSearchQuery, searchResults, loading, error, handleSearch };
+  return { searchQuery, setSearchQuery, searchResults, loading, error, handleSearch, hasMore, onLoadMore };
 };
 
 export default useSearchContainer;

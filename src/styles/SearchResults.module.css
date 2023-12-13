@@ -3,3 +3,17 @@
 .resultsContainer {
   margin-top: 16px;
 }
+
+.loadMoreButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.loadMoreButton {
+  margin-left: 8px;
+}
+
+.loadMoreButton .MuiCircularProgress-root {
+  margin-right: 8px;
+}

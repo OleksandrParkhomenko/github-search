@@ -2,8 +2,12 @@
 import { gql } from '@apollo/client';
 
 export const SEARCH_REPOSITORIES = gql`
-  query SearchRepositories($query: String!) {
-    search(query: $query, type: REPOSITORY, first: 10) {
+  query SearchRepositories($query: String!, $first: Int, $after: String) {
+    search(query: $query, type: REPOSITORY, first: $first, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       edges {
         node {
           ... on Repository {
