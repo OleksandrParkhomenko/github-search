@@ -4,6 +4,7 @@ import { useLazyQuery } from '@apollo/client';
 import { SEARCH_REPOSITORIES } from '../../../services/githubQueries';
 import { IGitHubSearchResponse } from '../../../models/IGitHubSearchResponse';
 import { IGitHubRepository } from '../../../models/IGitHubRepository';
+import { debounce } from '../../../utils/debounce';
 
 interface UseSearchContainerProps {
   onSearch: (query: string, repositories: IGitHubRepository[]) => void;
@@ -23,8 +24,12 @@ const useSearchContainer = ({ onSearch }: UseSearchContainerProps): UseSearchCon
   const [searchRepositories, { loading, error, data }] = useLazyQuery<IGitHubSearchResponse>(SEARCH_REPOSITORIES);
   const [searchResults, setSearchResults] = useState<IGitHubRepository[]>([]);
 
-  const handleSearch = () => {
+  const delayedSearch = debounce(() => {
     searchRepositories({ variables: { query: searchQuery } });
+  }, 500); 
+
+  const handleSearch = () => {
+    delayedSearch();
   };
 
   useEffect(() => {
