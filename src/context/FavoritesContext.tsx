@@ -1,5 +1,5 @@
 // src/context/FavoritesContext.tsx
-import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
+import { createContext, useContext, ReactNode, useState } from 'react';
 
 interface FavoritesContextProps {
   favorites: string[];
