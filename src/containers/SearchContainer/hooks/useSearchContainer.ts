@@ -6,9 +6,6 @@ import { IGitHubSearchResponse } from '../../../models/IGitHubSearchResponse';
 import { IGitHubRepository } from '../../../models/IGitHubRepository';
 import { debounce } from '../../../utils/debounce';
 
-interface UseSearchContainerProps {
-  onSearch: (query: string, repositories: IGitHubRepository[]) => void;
-}
 
 interface UseSearchContainerResult {
   searchQuery: string;
@@ -19,7 +16,7 @@ interface UseSearchContainerResult {
   handleSearch: () => void;
 }
 
-const useSearchContainer = ({ onSearch }: UseSearchContainerProps): UseSearchContainerResult => {
+const useSearchContainer = (): UseSearchContainerResult => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchRepositories, { loading, error, data }] = useLazyQuery<IGitHubSearchResponse>(SEARCH_REPOSITORIES);
   const [searchResults, setSearchResults] = useState<IGitHubRepository[]>([]);
@@ -35,9 +32,7 @@ const useSearchContainer = ({ onSearch }: UseSearchContainerProps): UseSearchCon
   useEffect(() => {
     if (data && data.search) {
       const repositories = data.search.edges.map((edge: any) => edge.node);
-      console.log(repositories);
       setSearchResults(repositories);
-      onSearch(searchQuery, repositories);
     }
   }, [data, searchQuery]);
 

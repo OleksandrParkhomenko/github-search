@@ -8,6 +8,8 @@ interface FavoritesContextProps {
   addFavorite: (repository: IGitHubRepository) => void;
   removeFavorite: (id: string) => void;
   rateFavorite: (id: string, rating: number) => void;
+  isFavorite: (id: string) => boolean;
+  repositoryRating: (id: string) => number;
 }
 
 const FavoritesContext = createContext<FavoritesContextProps | undefined>(undefined);
@@ -34,12 +36,20 @@ const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
   };
 
+  const isFavorite = (repositoryId: string) => {
+    return favorites.some((favorite) => favorite.id === repositoryId);
+  }
+
+  const repositoryRating = (repositoryId: string) => {
+    return favorites.find((favorite) => favorite.id === repositoryId)?.rating || 0;
+  }
+
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, rateFavorite }}>
+    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, rateFavorite, isFavorite, repositoryRating }}>
       {children}
     </FavoritesContext.Provider>
   );
