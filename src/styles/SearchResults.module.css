@@ -5,7 +5,7 @@
 }
 
 .resultsTitle {
-  margin-bottom: 16px;
+  margin-bottom: 16px !important;
 }
 
 .loadMoreButtonContainer {
@@ -16,6 +16,7 @@
 
 .loadMoreButton {
   margin-left: 8px;
+  margin-bottom: 16px !important;
 }
 
 .loadMoreButton .MuiCircularProgress-root {
