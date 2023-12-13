@@ -1,9 +1,9 @@
 // src/containers/SearchContainer/useSearchContainer.ts
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { SEARCH_REPOSITORIES } from '../../services/githubQueries';
-import { IGitHubSearchResponse } from '../../models/IGitHubSearchResponse';
-import { IGitHubRepository } from '../../models/IGitHubRepository';
+import { SEARCH_REPOSITORIES } from '../../../services/githubQueries';
+import { IGitHubSearchResponse } from '../../../models/IGitHubSearchResponse';
+import { IGitHubRepository } from '../../../models/IGitHubRepository';
 
 interface UseSearchContainerProps {
   onSearch: (query: string, repositories: IGitHubRepository[]) => void;
@@ -30,6 +30,7 @@ const useSearchContainer = ({ onSearch }: UseSearchContainerProps): UseSearchCon
   useEffect(() => {
     if (data && data.search) {
       const repositories = data.search.edges.map((edge: any) => edge.node);
+      console.log(repositories);
       setSearchResults(repositories);
       onSearch(searchQuery, repositories);
     }

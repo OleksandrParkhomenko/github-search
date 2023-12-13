@@ -1,0 +1,39 @@
+/* RepositoryListItem.module.css */
+
+.resultItem {
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.repositoryName {
+  margin-bottom: 8px;
+}
+
+.owner {
+  color: #555;
+}
+
+.repositoryDescription {
+  color: #777;
+  margin-bottom: 16px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonContainer {
+  margin-left: auto;
+}

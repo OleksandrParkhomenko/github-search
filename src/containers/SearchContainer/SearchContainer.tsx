@@ -1,8 +1,11 @@
 // src/containers/SearchContainer/SearchContainer.tsx
 import React from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import SearchResults from '../../components/SearchResults/SearchResults';
-import useSearchContainer from './useSearchContainer';
+import useSearchContainer from './hooks/useSearchContainer';
+import styles from '../../styles/SearchContainer.module.css';
 
 const SearchContainer: React.FC = () => {
   const { searchQuery, setSearchQuery, searchResults, loading, error, handleSearch } = useSearchContainer({
@@ -14,10 +17,8 @@ const SearchContainer: React.FC = () => {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} value={searchQuery} onChange={setSearchQuery} />
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-      <SearchResults searchResults={searchResults} />
+      <SearchBar onSearch={handleSearch} value={searchQuery} onChange={setSearchQuery} loading={loading}/>
+      <SearchResults loading={loading} error={error} searchResults={searchResults} />
     </div>
   );
 };

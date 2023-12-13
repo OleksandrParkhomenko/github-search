@@ -1,0 +1,15 @@
+/* SearchBar.module.css */
+
+.container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.input {
+  flex: 1;
+}
+
+.button {
+  width: 100px; 
+}

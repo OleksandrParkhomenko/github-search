@@ -9,6 +9,15 @@ export const SEARCH_REPOSITORIES = gql`
           ... on Repository {
             id
             name
+            description
+            url
+            owner {
+              login
+            }
+            primaryLanguage {
+              name
+              color
+            }
           }
         }
       }

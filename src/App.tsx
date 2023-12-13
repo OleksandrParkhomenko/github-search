@@ -10,6 +10,11 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 
 import AppContextProvider from './context/AppContextProvider';
 
+import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
+
+loadDevMessages();
+loadErrorMessages();
+
 const App: React.FC = () => {
   return (
     <AppContextProvider>

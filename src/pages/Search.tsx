@@ -1,11 +1,15 @@
 // src/pages/Search.tsx
 import React from 'react';
 import SearchContainer from '../containers/SearchContainer/SearchContainer';
+import Typography from '@mui/material/Typography';
+import styles from '../styles/common.module.css';
 
 const Search: React.FC = () => {
   return (
-    <div>
-      <h1>Search Page</h1>
+    <div className={styles.container}>
+      <Typography variant="h1" gutterBottom>
+        Search Page
+      </Typography>
       <SearchContainer />
     </div>
   );
