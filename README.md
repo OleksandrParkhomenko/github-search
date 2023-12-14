@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# GitHub Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GitHub Search is a web application that allows users users to search for repositories on Github, mark as favorites and rate them.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+To run the project locally, follow these steps:
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Make sure you have Node.js and npm installed on your machine.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Installation
 
-### `npm test`
+1. Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/your-username/github-search.git
+cd github-search
+```
 
-### `npm run build`
+2. Install dependencies
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Set environmental variables
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create <code>.env</code> file -> Use <code>.env.example</code> content as template -> Set your <b>GitHub access token</b> as <code>REACT_APP_GITHUB_API_TOKEN</code>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Start development server
+```bash
+npm start
+```
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Enter the name of a GitHub repository in the search bar.
+* View the search results, including repository details.
+* Load more repositories with the <b>Load More</b> button.
+* You can add repository to favorites and rate it.
+* Click on :blue_heart: <b>Favorites</b> in right corner and manage the list of favorite repositories.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deployment
+The project is deployed on GitHub Pages. Visit [GitHub Search](https://github-search-alex-parkhomenkos-projects.vercel.app/) to see it live.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Built With
+* React
+* Apollo Client for GraphQL queries
+* Material-UI for styling
