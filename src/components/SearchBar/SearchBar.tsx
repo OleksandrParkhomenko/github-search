@@ -2,7 +2,8 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
-import styles from '../../styles/SearchBar.module.css';
+
+import styles from 'styles/SearchBar.module.css';
 
 interface SearchBarProps {
   value: string;

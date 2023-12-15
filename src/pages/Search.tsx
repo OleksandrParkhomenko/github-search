@@ -1,10 +1,11 @@
 // src/pages/Search.tsx
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import styles from '../styles/common.module.css';
-import useSearch from '../hooks/useSearch';
-import SearchResults from '../components/SearchResults/SearchResults';
-import SearchBar from '../components/SearchBar/SearchBar';
+
+import SearchResults from 'components/SearchResults/SearchResults';
+import SearchBar from 'components/SearchBar/SearchBar';
+import useSearch from 'hooks/useSearch';
+import styles from 'styles/common.module.css';
 
 const Search: React.FC = () => {
   const { searchQuery, setSearchQuery, repositories, loading, hasMore, loadMore, called } = useSearch();

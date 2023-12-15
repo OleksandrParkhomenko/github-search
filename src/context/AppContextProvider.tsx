@@ -1,10 +1,11 @@
 // src/context/AppContextProvider.tsx
 import React, { ReactNode } from 'react';
-import { FavoritesProvider } from './FavoritesContext';
-import { ApolloProvider } from '@apollo/client';
-import client from '../services/githubApollo';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../theme';
+import { ApolloProvider } from '@apollo/client';
+
+import { FavoritesProvider } from 'context/FavoritesContext';
+import client from 'services/githubApollo';
+import theme from 'theme';
 
 interface AppContextProviderProps {
   children: ReactNode;

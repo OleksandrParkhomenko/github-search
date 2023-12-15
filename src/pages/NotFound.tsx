@@ -1,6 +1,7 @@
 // src/pages/NotFound.tsx
 import React from 'react';
-import styles from '../styles/common.module.css';
+
+import styles from 'styles/common.module.css';
 
 const NotFound: React.FC = () => {
   return (

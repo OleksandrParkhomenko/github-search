@@ -7,10 +7,11 @@ import Chip from '@mui/material/Chip';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { IGitHubRepository } from '../../models/IGitHubRepository';
-import { IFavoriteGitHubRepository } from '../../models/IFavoriteGitHubRepository';
-import { useFavorites } from '../../context/FavoritesContext';
-import styles from '../../styles/RepositoryListItem.module.css';
+
+import { useFavorites } from 'context/FavoritesContext';
+import { IGitHubRepository } from 'models/IGitHubRepository';
+import { IFavoriteGitHubRepository } from 'models/IFavoriteGitHubRepository';
+import styles from 'styles/RepositoryListItem.module.css';
 
 interface RepositoryListItemProps {
   repository: IGitHubRepository | IFavoriteGitHubRepository;

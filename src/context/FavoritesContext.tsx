@@ -1,7 +1,8 @@
 // src/context/FavoritesContext.tsx
 import { createContext, useContext, ReactNode, useEffect, useState } from 'react';
-import { IFavoriteGitHubRepository } from '../models/IFavoriteGitHubRepository';
-import { IGitHubRepository } from '../models/IGitHubRepository';
+
+import { IFavoriteGitHubRepository } from 'models/IFavoriteGitHubRepository';
+import { IGitHubRepository } from 'models/IGitHubRepository';
 
 interface FavoritesContextProps {
   favorites: IFavoriteGitHubRepository[];

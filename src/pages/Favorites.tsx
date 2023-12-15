@@ -1,10 +1,11 @@
 // src/pages/Favorites.tsx
 import React from 'react';
-import RepositoryList from '../components/RepositoryList/RepositoryList';
-import { useFavorites } from '../context/FavoritesContext';
-import styles from '../styles/common.module.css';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
+
+import { useFavorites } from 'context/FavoritesContext';
+import RepositoryList from 'components/RepositoryList/RepositoryList';
+import styles from 'styles/common.module.css';
 
 const Favorites: React.FC = () => {
   const { favorites } = useFavorites();

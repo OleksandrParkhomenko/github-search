@@ -1,12 +1,13 @@
 // src/components/SearchResults/SearchResults.tsx
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import styles from '../../styles/SearchResults.module.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import { IGitHubRepository } from '../../models/IGitHubRepository';
-import RepositoryList from '../RepositoryList/RepositoryList';
+
+import { IGitHubRepository } from 'models/IGitHubRepository';
+import RepositoryList from 'components/RepositoryList/RepositoryList';
+import styles from 'styles/SearchResults.module.css';
 
 interface SearchResultsProps {
   repositories: IGitHubRepository[];

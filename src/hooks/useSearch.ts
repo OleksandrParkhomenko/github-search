@@ -1,11 +1,12 @@
 // src/hooks/useSearch.ts
 import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { SEARCH_REPOSITORIES } from '../services/githubQueries';
-import { IGitHubSearchResponse } from '../models/IGitHubSearchResponse';
-import { IGitHubRepository } from '../models/IGitHubRepository';
-import { useDebounce } from './useDebounce';
-import { IGitHubSearchEdge } from '../models/IGitHubSearchEdge';
+
+import { SEARCH_REPOSITORIES } from 'services/githubQueries';
+import { IGitHubSearchResponse } from 'models/IGitHubSearchResponse';
+import { IGitHubRepository } from 'models/IGitHubRepository';
+import { IGitHubSearchEdge } from 'models/IGitHubSearchEdge';
+import { useDebounce } from 'hooks/useDebounce';
 
 
 const SEARCH_REQUEST_SIZE = 20;
