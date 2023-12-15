@@ -1,4 +1,4 @@
-// src/components/repositories/SearchResults.tsx
+// src/components/SearchResults/SearchResults.tsx
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import styles from '../../styles/SearchResults.module.css';

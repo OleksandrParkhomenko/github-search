@@ -1,4 +1,4 @@
-// src/pages/Favorites/Favorites.tsx
+// src/pages/Favorites.tsx
 import React from 'react';
 import RepositoryList from '../components/RepositoryList/RepositoryList';
 import { useFavorites } from '../context/FavoritesContext';

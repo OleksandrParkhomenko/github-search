@@ -1,4 +1,4 @@
-// src/components/FavoritesList/FavoritesList.tsx
+// src/components/RepositoryList/RepositoryList.tsx
 import React from 'react';
 import { IGitHubRepository } from '../../models/IGitHubRepository';
 import RepositoryListItem from '../RepositoryListItem/RepositoryListItem';
