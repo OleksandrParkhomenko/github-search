@@ -1,10 +1,10 @@
 // src/components/FavoritesList/FavoritesList.tsx
 import React from 'react';
-import { IFavoriteGitHubRepository } from '../../models/IFavoriteGitHubRepository';
+import { IGitHubRepository } from '../../models/IGitHubRepository';
 import RepositoryListItem from '../RepositoryListItem/RepositoryListItem';
 
 interface RepositoryListProps {
-  repositories: IFavoriteGitHubRepository[];
+  repositories: IGitHubRepository[];
 }
 
 const RepositoryList: React.FC<RepositoryListProps> = ({ repositories }) => {

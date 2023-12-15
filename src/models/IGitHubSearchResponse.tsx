@@ -1,9 +1,11 @@
 // src/models/IGitHubSearchResponse.ts
-import { IGitHubRepository } from './IGitHubRepository';
+import { IGitHubSearchEdge } from './IGitHubSearchEdge';
+
 
 export interface IGitHubSearchResponse {
   search: {
-    edges: IGitHubRepository[];
+    repositoryCount: number,
+    edges: IGitHubSearchEdge[];
     pageInfo: {
       endCursor: string;
       hasNextPage: boolean;

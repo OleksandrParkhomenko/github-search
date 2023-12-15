@@ -52,6 +52,9 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
       <Typography variant="body1" className={styles.repositoryDescription}>
         {repository.description || 'No description available.'}
       </Typography>
+      <Typography variant="body1" className={styles.repositoryDescription}>
+        ID: {repository.id || 'No description available.'}
+      </Typography>
       <div className={styles.footer}>
         {repository.primaryLanguage && (
           <Chip

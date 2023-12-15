@@ -2,15 +2,15 @@
 import React from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import SearchResults from '../../components/SearchResults/SearchResults';
-import useSearchContainer from './hooks/useSearchContainer';
+import useSearch from '../../hooks/useSearch';
 
 const SearchContainer: React.FC = () => {
-  const { searchQuery, setSearchQuery, searchResults, loading, loaded, error, hasMore, onLoadMore } = useSearchContainer();
+  const { searchQuery, setSearchQuery, repositories, loading, hasMore, onLoadMore } = useSearch();
 
   return (
     <div>
       <SearchBar value={searchQuery} onChange={setSearchQuery} loading={loading} />
-      <SearchResults loading={loading} loaded={loaded} error={error} searchResults={searchResults} hasMore={hasMore} onLoadMore={onLoadMore} />
+      <SearchResults loading={loading} repositories={repositories} hasMore={hasMore} onLoadMore={onLoadMore} />
     </div>
   );
 };
