@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { SEARCH_REPOSITORIES } from '../services/githubQueries';
 import { IGitHubSearchResponse } from '../models/IGitHubSearchResponse';
 import { IGitHubRepository } from '../models/IGitHubRepository';
-import { useDebounce } from '../utils/useDebounce';
+import { useDebounce } from './useDebounce';
 import { IGitHubSearchEdge } from '../models/IGitHubSearchEdge';
 
 
