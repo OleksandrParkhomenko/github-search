@@ -5,31 +5,25 @@ import styles from '../../styles/SearchResults.module.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import RepositoryListItem from '../RepositoryListItem/RepositoryListItem';
 import { IGitHubRepository } from '../../models/IGitHubRepository';
+import RepositoryList from '../RepositoryList/RepositoryList';
 
 interface SearchResultsProps {
   repositories: IGitHubRepository[];
   loading: boolean;
-  // called: boolean;
-  // error: Error | undefined;
+  called: boolean;
   hasMore: boolean;
   onLoadMore: () => void;
 }
-const SearchResults: React.FC<SearchResultsProps> = ({ repositories, loading, hasMore, onLoadMore }) => {
-  // const { repositories, loading, called, error, hasMore, onLoadMore } = useSearch();
+const SearchResults: React.FC<SearchResultsProps> = ({ repositories, loading, called, hasMore, onLoadMore }) => {
   return (
     <div>
-      {/* {error && <Alert severity="error" className={styles.alertContainer}>Error: {error.message}</Alert>} */}
       {repositories.length > 0 && (
         <>
           <Typography variant="h5" className={styles.resultsTitle}>
             Search Results
           </Typography>
-          {/* <RepositoryList repositories={repositories}/> */}
-          {repositories.map((repository) => (
-            <RepositoryListItem key={repository.id} repository={repository} />
-          ))}
+          <RepositoryList repositories={repositories}/>
           {hasMore && (
             <div className={styles.loadMoreButtonContainer}>
               <Button
@@ -46,11 +40,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ repositories, loading, ha
           )}
         </>
       )}
-      {/* {!error && !loading && called && repositories.length === 0 && (
+      {called && !loading && repositories.length === 0 && (
         <Alert severity="info" className={styles.alertContainer}>
           No results found.
         </Alert>
-      )} */}
+      )}
     </div>
   );
 };
