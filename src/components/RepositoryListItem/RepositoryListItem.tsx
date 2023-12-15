@@ -1,5 +1,5 @@
 // src/components/RepositoryListItem/RepositoryListItem.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -19,22 +19,11 @@ interface RepositoryListItemProps {
 const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
   repository,
 }) => {
-  const { addFavorite, removeFavorite, rateFavorite, isFavorite, repositoryRating } = useFavorites();
-  const [rating, setRating] = useState<number>(repositoryRating(repository.id));
-  const isRepositoryFavorite = isFavorite(repository.id);
+  const { rateFavorite, getRating, isFavorite, toggleFavorite } = useFavorites();
 
   const handleRatingChange = (event: React.ChangeEvent<{}>, value: number | null) => {
     if (value !== null) {
-      setRating(value);
       rateFavorite(repository.id, value);
-    }
-  };
-
-  const handleFavoriteToggle = () => {
-    if (isRepositoryFavorite) {
-      removeFavorite(repository.id);
-    } else {
-      addFavorite(repository);
     }
   };
 
@@ -44,11 +33,11 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
         <Typography variant="h6" className={styles.repositoryName}>
           {repository.name}
         </Typography>
-        {isRepositoryFavorite && (
+        {isFavorite(repository.id) && (
           <div className={styles.ratingContainer}>
             <Rating
               name={`rating-${repository.id}`}
-              value={rating}
+              value={getRating(repository.id)}
               precision={1}
               onChange={handleRatingChange}
               icon={<StarIcon fontSize="inherit" />}
@@ -77,10 +66,10 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
         <div className={styles.buttonContainer}>
           <Button
             variant="contained"
-            color={isRepositoryFavorite ? 'error' : 'primary'}
-            onClick={handleFavoriteToggle}
+            color={isFavorite(repository.id) ? 'error' : 'primary'}
+            onClick={() => toggleFavorite(repository)}
           >
-            {isRepositoryFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+            {isFavorite(repository.id) ? 'Remove from Favorites' : 'Add to Favorites'}
           </Button>
         </div>
       </div>

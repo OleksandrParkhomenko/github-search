@@ -5,11 +5,10 @@ import { IGitHubRepository } from '../models/IGitHubRepository';
 
 interface FavoritesContextProps {
   favorites: IFavoriteGitHubRepository[];
-  addFavorite: (repository: IGitHubRepository) => void;
-  removeFavorite: (id: string) => void;
+  toggleFavorite: (repository: IGitHubRepository) => void;
   rateFavorite: (id: string, rating: number) => void;
+  getRating: (id: string) => number;
   isFavorite: (id: string) => boolean;
-  repositoryRating: (id: string) => number;
 }
 
 const FavoritesContext = createContext<FavoritesContextProps | undefined>(undefined);
@@ -21,6 +20,16 @@ const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       return storedFavorites ? JSON.parse(storedFavorites) : [];
     }
   );
+
+  const isFavorite = (id: string) => favorites.some((favorite) => favorite.id === id);
+
+  const toggleFavorite = (repository: IGitHubRepository) => {
+    if (isFavorite(repository.id)) {
+      removeFavorite(repository.id);
+    } else {
+      addFavorite(repository);
+    }
+  };
 
   const addFavorite = (repository: IGitHubRepository) => {
     setFavorites((prevFavorites) => [{ ...repository, rating: 0 }, ...prevFavorites]);
@@ -36,20 +45,14 @@ const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     );
   };
 
-  const isFavorite = (repositoryId: string) => {
-    return favorites.some((favorite) => favorite.id === repositoryId);
-  }
-
-  const repositoryRating = (repositoryId: string) => {
-    return favorites.find((favorite) => favorite.id === repositoryId)?.rating || 0;
-  }
+  const getRating = (id: string) => favorites.find((favorite) => favorite.id === id)?.rating || -1;
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, rateFavorite, isFavorite, repositoryRating }}>
+    <FavoritesContext.Provider value={{ favorites, rateFavorite, getRating, toggleFavorite, isFavorite }}>
       {children}
     </FavoritesContext.Provider>
   );
